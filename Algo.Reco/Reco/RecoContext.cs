@@ -82,15 +82,19 @@ namespace Algo
             return 1 / (1 + DistanceNorm2( u1, u2 ));
         }
 
-
-
-
-
-
         public SimilarUser[] GetSimilarUsers( User u, int count )
         {
-
-            return null;
+            BestKeeper<SimilarUser> best = new BestKeeper<SimilarUser>( count, 
+                                                    (s1,s2) => Math.Sign( s2.Similarity - s1.Similarity ) );
+            //BestKeeper<SimilarUser> worst = new BestKeeper<SimilarUser>( count, 
+            //                                        (s1,s2) => Math.Sign( s1.Similarity - s2.Similarity ) );
+            foreach( var other in Users )
+            {
+                if( other == u ) continue;
+                SimilarUser sU = new SimilarUser( other, SimilarityPearson( u, other ) );
+                best.Add( sU );
+            }
+            return best.ToArray();
         }
     }
 }
