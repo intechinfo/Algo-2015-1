@@ -111,5 +111,25 @@ namespace Algo.Tests
                 Assert.That( c.Movies[i].MovieID, Is.EqualTo( i+1 ) );
         }
 
+        [Test]
+        public void computing_the_distance_between_2_users()
+        {
+            RecoContext c = new RecoContext();
+            c.LoadFrom( _goodDataPath );
+
+            const int part = 10;
+
+            for( int i = 0; i < c.Users.Length/part; i++ )
+            {
+                var u1 = c.Users[i];
+                Assert.That( c.DistanceNorm2( u1, u1 ), Is.EqualTo( 0 ) );
+                for( int j = i + 1; j < c.Users.Length/part; j++ )
+                {
+                    var u2 = c.Users[j];
+                    Assert.That( c.DistanceNorm2( u1, u2 ), Is.EqualTo( c.DistanceNorm2( u2, u1 ) ) );
+                }
+            }
+        }
+
     }
 }
