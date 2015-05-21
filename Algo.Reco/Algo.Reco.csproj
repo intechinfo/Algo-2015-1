@@ -53,7 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BestKeeper.cs" />
     <Compile Include="Reco\Movie.Cleanup.cs" />
+    <Compile Include="Reco\SimilarUser.cs" />
     <Compile Include="Reco\User.Cleanup.cs" />
     <Compile Include="Reco\Movie.cs" />
     <Compile Include="Reco\RecoContext.cs" />

@@ -18,6 +18,42 @@ namespace Algo
             User.ReadRatings( Users, Movies, Path.Combine( folder, "ratings.dat" ) );
         }
 
+        public double SimilarityPearson( User u1, User u2 )
+        {
+            IEnumerable<Movie> common = u1.Ratings.Keys.Intersect( u2.Ratings.Keys );
+            double count = common.Count();
+            if( count == 0 ) return 0;
+            if( count == 1 ) return SimilarityNorm2( u1, u2 );
+            double sumProd = 0;
+            double sumSquare1 = 0;
+            double sumSquare2 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+
+            #region loop
+            foreach( Movie m in common )
+            {
+                int r1 = u1.Ratings[m];
+                int r2 = u2.Ratings[m];
+                sum1 += r1;
+                sum2 += r2;
+                sumSquare1 += r1 * r1;
+                sumSquare2 += r2 * r2;
+                sumProd += r1 * r2;
+            }
+            #endregion
+
+            #region computing result
+            double numerator = sumProd - ((sum1 * sum2) / count);
+            double denominator1 = sumSquare1 - ((sum1 * sum1) / count);
+            double denominator2 = sumSquare2 - ((sum2 * sum2) / count);
+            double denominator = Math.Sqrt( denominator1 * denominator2 );
+            #endregion
+
+            if( denominator < Double.Epsilon ) return 1;
+            return numerator / denominator;
+        }
+
         public double DistanceNorm2( User u1, User u2 )
         {
             if( u1 == u2 && u1.Ratings.Count == 0 ) return 0.0;
@@ -41,10 +77,20 @@ namespace Algo
             return atLeastOneMovieInCommon ? Math.Sqrt( sumSquare ) : Double.PositiveInfinity;
         }
 
-        public double Similarity( User u1, User u2 )
+        public double SimilarityNorm2( User u1, User u2 )
         {
             return 1 / (1 + DistanceNorm2( u1, u2 ));
         }
-    
+
+
+
+
+
+
+        public SimilarUser[] GetSimilarUsers( User u, int count )
+        {
+
+            return null;
+        }
     }
 }
