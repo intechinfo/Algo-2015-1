@@ -34,5 +34,20 @@ namespace ITI.Parsing.Tests
             Assert.That( t.MatchInteger( out v ) && v == 47877 );
             Assert.That( t.CurrentToken, Is.EqualTo( TokenType.EndOfInput ) );
         }
+
+        [Test]
+        public void identifier_support()
+        {
+            string s = "4*a+6/delta";
+            Tokenizer t = new Tokenizer( s );
+            int four, six;
+            string a, delta;
+            Assert.That( t.MatchInteger( out four ) && four == 4 );
+            Assert.That( t.Match( TokenType.Mult ) );
+            Assert.That( t.MatchIdentifier( out a ) && a == "a" );
+            Assert.That( t.Match( TokenType.Plus ) );
+            Assert.That( t.MatchInteger( out six ) && six == 6 );
+            Assert.That( t.MatchIdentifier( out delta ) && delta == "delta" );
+        }
     }
 }
