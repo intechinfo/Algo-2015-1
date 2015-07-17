@@ -16,8 +16,7 @@ namespace ITI.Parsing.Tests
         {
             string s = " 4 * 8 + 7 (5)/8*47877 ";
             Tokenizer t = new Tokenizer( s );
-            Assert.That( t.CurrentToken, Is.EqualTo( TokenType.None ) );
-            Assert.That( t.GetNextToken(), Is.EqualTo( TokenType.Number ) );
+            Assert.That( t.CurrentToken, Is.EqualTo( TokenType.Number ) );
             Assert.That( t.GetNextToken(), Is.EqualTo( TokenType.Mult ) );
 
             Assert.That( t.Match( TokenType.Mult ) );
@@ -48,6 +47,18 @@ namespace ITI.Parsing.Tests
             Assert.That( t.Match( TokenType.Plus ) );
             Assert.That( t.MatchInteger( out six ) && six == 6 );
             Assert.That( t.MatchIdentifier( out delta ) && delta == "delta" );
+        }
+
+        [Test]
+        public void identifier_support_match_known()
+        {
+            string s = "when identifiers are known";
+            Tokenizer t = new Tokenizer( s );
+            Assert.That( t.MatchIdentifier( "when" ) );
+            Assert.That( t.MatchIdentifier( "identifiers" ) );
+            Assert.That( t.MatchIdentifier( "are" ) );
+            Assert.That( t.MatchIdentifier( "known" ) );
+            Assert.That( !t.MatchIdentifier( "whatever since we are at the end" ) );
         }
     }
 }

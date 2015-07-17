@@ -34,6 +34,7 @@ namespace ITI.Parsing
             _type = TokenType.None;
             _pos = startIndex;
             _maxPos = startIndex + count;
+            GetNextToken();
         }
 
         #region Head (private)
