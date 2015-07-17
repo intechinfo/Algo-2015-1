@@ -100,7 +100,7 @@ namespace ITI.Parsing
             return false;
         }
 
-        TokenType GetNextToken()
+        public TokenType GetNextToken()
         {
             // 1 - The end.
             if( IsEnd ) return _type = TokenType.EndOfInput;

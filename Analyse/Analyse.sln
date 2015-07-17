@@ -5,6 +5,13 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Tokenizer", "ITI.Tokenizer\ITI.Tokenizer.csproj", "{CD178414-B10E-4B90-84A5-8CE1255D21EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Tokenizer.Tests", "ITI.Tokenizer.Tests\ITI.Tokenizer.Tests.csproj", "{E40E5A16-F6DA-4280-BE11-FA1984FB754F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{69599B80-9B1E-4152-8865-994486C4962A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{CD178414-B10E-4B90-84A5-8CE1255D21EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD178414-B10E-4B90-84A5-8CE1255D21EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD178414-B10E-4B90-84A5-8CE1255D21EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40E5A16-F6DA-4280-BE11-FA1984FB754F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40E5A16-F6DA-4280-BE11-FA1984FB754F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40E5A16-F6DA-4280-BE11-FA1984FB754F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40E5A16-F6DA-4280-BE11-FA1984FB754F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
