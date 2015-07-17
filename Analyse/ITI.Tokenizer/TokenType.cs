@@ -10,17 +10,20 @@ namespace ITI.Parsing
     public enum TokenType
     {
         None = 0,
-        IsAddOperator = 1,
-        Plus = IsAddOperator,
-        Minus = IsAddOperator + 2,
-        IsMultOperator = 4,
-        Mult = IsMultOperator,
-        Div = IsMultOperator + 2,
-        Number = 8,
-        OpenPar = 16,
-        ClosePar = 32,
-        Identifier = 64,
-        EndOfInput = 1024,
-        Error = 2048
+        Identifier = 1 << 10,
+        IsBracket = 1 << 11,
+        IsBinaryOperator = 1 << 12,
+        Number = 1 << 13,
+        
+        Plus = IsBinaryOperator + 0,
+        Minus = IsBinaryOperator + 1,
+        Mult = IsBinaryOperator + 2,
+        Div = IsBinaryOperator + 3,
+        
+        OpenPar = IsBracket + 0,
+        ClosePar = IsBracket + 1,
+        
+        EndOfInput = 1 << 30,
+        Error = 1 << 31
     }
 }

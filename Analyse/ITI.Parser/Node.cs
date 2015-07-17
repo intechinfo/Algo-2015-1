@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.Parsing
 {
-    public class Class1
+    public abstract class Node
     {
     }
 }

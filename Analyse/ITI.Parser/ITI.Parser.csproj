@@ -34,7 +34,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Analyser.cs" />
+    <Compile Include="BinaryOperatorNode.cs" />
+    <Compile Include="ErrorNode.cs" />
+    <Compile Include="ConstantNode.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
