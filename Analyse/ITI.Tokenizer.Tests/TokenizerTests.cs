@@ -46,6 +46,7 @@ namespace ITI.Parsing.Tests
             Assert.That( t.MatchIdentifier( out a ) && a == "a" );
             Assert.That( t.Match( TokenType.Plus ) );
             Assert.That( t.MatchInteger( out six ) && six == 6 );
+            Assert.That( t.Match( TokenType.Div ) );
             Assert.That( t.MatchIdentifier( out delta ) && delta == "delta" );
         }
 

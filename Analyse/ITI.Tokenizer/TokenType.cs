@@ -19,7 +19,8 @@ namespace ITI.Parsing
         Number = 8,
         OpenPar = 16,
         ClosePar = 32,
-        EndOfInput = 64,
-        Error = 128
+        Identifier = 64,
+        EndOfInput = 1024,
+        Error = 2048
     }
 }

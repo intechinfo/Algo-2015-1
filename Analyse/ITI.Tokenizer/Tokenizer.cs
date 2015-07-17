@@ -14,7 +14,9 @@ namespace ITI.Parsing
         int _maxPos;
         TokenType _type;
 
+        readonly StringBuilder _buffer;
         int _curIntValue;
+        string _curIdentifierValue;
 
         public Tokenizer( string s )
             : this( s, 0, s.Length )
@@ -34,6 +36,7 @@ namespace ITI.Parsing
             _type = TokenType.None;
             _pos = startIndex;
             _maxPos = startIndex + count;
+            _buffer = new StringBuilder();
             GetNextToken();
         }
 
@@ -133,6 +136,18 @@ namespace ITI.Parsing
                                 Forward();
                             }
                         }
+                        else if( c == '_'  || Char.IsLetter( c ) )
+                        {
+                            _type = TokenType.Identifier;
+                            _buffer.Clear();
+                            _buffer.Append( c );
+                            while( !IsEnd && (Char.IsLetterOrDigit( c = Peek() ) || c == '_') )
+                            {
+                                _buffer.Append( c );
+                                Forward();
+                            }
+                            _curIdentifierValue = _buffer.ToString();
+                        }
                         else _type = TokenType.Error;
                         break;
                     }
@@ -140,5 +155,27 @@ namespace ITI.Parsing
             return _type;
         }
 
+
+        public bool MatchIdentifier( out string identifer )
+        {
+            identifer = null;
+            if( _type == TokenType.Identifier )
+            {
+                identifer = _curIdentifierValue;
+                GetNextToken();
+                return true;
+            }
+            return false;
+        }
+
+        public bool MatchIdentifier( string expected )
+        {
+            if( _type == TokenType.Identifier && _curIdentifierValue == expected )
+            {
+                GetNextToken();
+                return true;
+            }
+            return false;
+        }
     }
 }
