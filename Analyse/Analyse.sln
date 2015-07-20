@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{69599B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Parser", "ITI.Parser\ITI.Parser.csproj", "{3C276C00-0260-4D32-BADF-F210875AE932}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Parser.Tests", "ITI.Parser.Tests\ITI.Parser.Tests.csproj", "{B9BC268E-8B68-41EF-A62F-FF75A0FC75BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{3C276C00-0260-4D32-BADF-F210875AE932}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C276C00-0260-4D32-BADF-F210875AE932}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C276C00-0260-4D32-BADF-F210875AE932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BC268E-8B68-41EF-A62F-FF75A0FC75BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BC268E-8B68-41EF-A62F-FF75A0FC75BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BC268E-8B68-41EF-A62F-FF75A0FC75BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BC268E-8B68-41EF-A62F-FF75A0FC75BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
