@@ -24,9 +24,9 @@ namespace ITI.Parsing
         public override Node Visit( BinaryOperatorNode n )
         {
             _buffer.Append( '(' );
-            this.Visit( n.Left );
+            this.VisitNode( n.Left );
             _buffer.Append( n.OperatorString );
-            this.Visit( n.Right );
+            this.VisitNode( n.Right );
             _buffer.Append( ')' );
             return n;
         }
@@ -39,7 +39,7 @@ namespace ITI.Parsing
         public static string Stringify( Node n )
         {
             var v = new ToStringVisitor();
-            v.Visit( n );
+            v.VisitNode( n );
             return v.ToString();
         }
 

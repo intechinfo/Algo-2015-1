@@ -10,7 +10,7 @@ namespace ITI.Parsing
     {
         public BinaryOperatorNode( TokenType oper, Node left, Node right )
         {
-            if( (oper & TokenType.IsBinaryOperator) == 0 )  throw new ArgumentException( "Must be e binary operator", "oper" );
+            if( (oper & TokenType.IsBinaryOperator) == 0 )  throw new ArgumentException( "Must be a binary operator", "oper" );
             if( left == null ) throw new ArgumentNullException( "left" );
             if( right == null ) throw new ArgumentNullException( "right" );
             Operator = oper;

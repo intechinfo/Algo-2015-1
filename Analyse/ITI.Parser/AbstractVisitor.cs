@@ -15,12 +15,17 @@ namespace ITI.Parsing
 
         public virtual Node Visit( BinaryOperatorNode n )
         {
-            this.Visit( n.Left );
-            this.Visit( n.Right );
+            this.VisitNode( n.Left );
+            this.VisitNode( n.Right );
             return n;
         }
 
         public virtual Node Visit( ErrorNode n )
+        {
+            return n;
+        }
+
+        public virtual Node Visit( UnaryOperatorNode n )
         {
             return n;
         }

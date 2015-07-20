@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,8 @@ namespace ITI.Parsing
 
         public double Visit( BinaryOperatorNode n )
         {
-            double left = this.Visit( n.Left );
-            double right = this.Visit( n.Right );
+            double left = this.VisitNode( n.Left );
+            double right = this.VisitNode( n.Right );
             switch( n.Operator )
             {
                 case TokenType.Plus: return left + right;
@@ -26,6 +27,12 @@ namespace ITI.Parsing
             }
         }
 
+        public double Visit( UnaryOperatorNode n )
+        {
+            Debug.Assert( n.Operator == TokenType.Minus, "Only Minus is currently supported as UnaryOperator." );
+            return -this.VisitNode( n.Right );
+        }
+
         public double Visit( ErrorNode n )
         {
             return Double.NaN;
@@ -33,7 +40,7 @@ namespace ITI.Parsing
 
         public static double Evaluate( Node n )
         {
-            return new EvalVisitor().Visit( n );
+            return new EvalVisitor().VisitNode( n );
         }
 
     }

@@ -42,6 +42,11 @@ namespace ITI.Parsing
 
         public Node Factor( Tokenizer tokenizer )
         {
+            if( tokenizer.Match( TokenType.Minus ) ) return new UnaryOperatorNode( TokenType.Minus, PositiveFactor( tokenizer ) );
+            return PositiveFactor( tokenizer );
+        }
+        public Node PositiveFactor( Tokenizer tokenizer )
+        {
             if( tokenizer.CurrentToken == TokenType.Number ) return Constant( tokenizer );
             if( !tokenizer.Match( TokenType.OpenPar ) ) return new ErrorNode( "Expected constant or opening parenthesis." );
             Node e = Expression( tokenizer );

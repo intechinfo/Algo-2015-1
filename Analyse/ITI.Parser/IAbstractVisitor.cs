@@ -13,11 +13,13 @@ namespace ITI.Parsing
         T Visit( BinaryOperatorNode n );
 
         T Visit( ErrorNode n );
+
+        T Visit( UnaryOperatorNode n );
    }
 
     public static class IAbstractVisitorExtensions
     {
-        public static T Visit<T>( this IAbstractVisitor<T> @this, Node n )
+        public static T VisitNode<T>( this IAbstractVisitor<T> @this, Node n )
         {
             return n.Accept( @this );
         }
