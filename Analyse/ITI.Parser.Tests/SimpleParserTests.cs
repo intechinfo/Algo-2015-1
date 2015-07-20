@@ -25,5 +25,16 @@ namespace ITI.Parsing.Tests
             var right = (BinaryOperatorNode)root.Right;
             Assert.That( right.Operator, Is.EqualTo( TokenType.Plus ) );
         }
+
+        [TestCase( "6 - 4 + 5", "[-,6,[+,4,5]]" )]
+        [TestCase( "6 - (4 + 5)", "[-,6,[+,4,5]]" )]
+        [TestCase( "68 - 4 * 8)", "[-,68,[*,4,8]]" )]
+        [TestCase( "68 * 4 + 8)", "[+,[*,68,4],8]" )]
+        public void simple_expression( string expression, string treeRepresentation )
+        {
+            Analyser a = new Analyser();
+            Node e = a.Expression( expression );
+            Assert.That( e.ToString(), Is.EqualTo( treeRepresentation ) );
+        }
     }
 }

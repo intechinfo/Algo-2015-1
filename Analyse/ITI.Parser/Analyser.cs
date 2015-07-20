@@ -16,7 +16,26 @@ namespace ITI.Parsing
 
         public Node Expression( Tokenizer tokenizer )
         {
-            return null;
+            Node term = Term( tokenizer );
+            if( !(term is ErrorNode) )
+            {
+                TokenType oper = tokenizer.CurrentToken;
+                if( oper == TokenType.Plus || oper == TokenType.Minus )
+                {
+                    tokenizer.GetNextToken();
+                    return new BinaryOperatorNode( oper, term, Expression( tokenizer ) );
+                }
+            }
+            return term;
+        }
+
+        public Node Term( Tokenizer tokenizer )
+        {
+            Node factor = Factor( tokenizer );
+            if( factor is ErrorNode ) return factor;
+            if( tokenizer.Match( TokenType.Mult ) ) return new BinaryOperatorNode( TokenType.Mult, factor, Term( tokenizer ) );
+            if( tokenizer.Match( TokenType.Div ) ) return new BinaryOperatorNode( TokenType.Div, factor, Term( tokenizer ) );
+            return factor;
         }
 
         public Node Factor( Tokenizer tokenizer )
