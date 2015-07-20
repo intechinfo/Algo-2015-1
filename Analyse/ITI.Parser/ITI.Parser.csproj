@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAbstractVisitor.cs" />
     <Compile Include="AbstractVisitor.cs" />
     <Compile Include="Analyser.cs" />
     <Compile Include="BinaryOperatorNode.cs" />

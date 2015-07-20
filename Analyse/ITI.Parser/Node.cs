@@ -8,7 +8,7 @@ namespace ITI.Parsing
 {
     public abstract class Node
     {
-        public abstract void Accept( AbstractVisitor v );
+        public abstract T Accept<T>( IAbstractVisitor<T> v );
 
     }
 }

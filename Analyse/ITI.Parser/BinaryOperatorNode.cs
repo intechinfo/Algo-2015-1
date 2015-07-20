@@ -46,9 +46,9 @@ namespace ITI.Parsing
             }
         }
 
-        public override void Accept( AbstractVisitor v )
+        public override T Accept<T>( IAbstractVisitor<T> v )
         {
-            v.Visit( this );
+            return v.Visit( this );
         }
 
     }

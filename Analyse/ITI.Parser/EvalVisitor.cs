@@ -6,35 +6,35 @@ using System.Threading.Tasks;
 
 namespace ITI.Parsing
 {
-    public class EvalVisitor : AbstractVisitor
+    public class EvalVisitor : IAbstractVisitor<double>
     {
-        double _curentValue;
-
-        public override void Visit( ConstantNode n )
+        public double Visit( ConstantNode n )
         {
-            _curentValue = n.Value;
+            return n.Value;
         }
 
-        public override void Visit( BinaryOperatorNode n )
+        public double Visit( BinaryOperatorNode n )
         {
-            Visit( n.Left );
-            double left = _curentValue;
-            Visit( n.Right );
-            double right = _curentValue;
+            double left = this.Visit( n.Left );
+            double right = this.Visit( n.Right );
             switch( n.Operator )
             {
-                case TokenType.Plus: _curentValue = left + right; break;
-                case TokenType.Minus: _curentValue = left - right; break;
-                case TokenType.Mult: _curentValue = left * right; break;
-                case TokenType.Div: _curentValue = left / right; break;
+                case TokenType.Plus: return left + right;
+                case TokenType.Minus: return left - right;
+                case TokenType.Mult: return left * right;
+                default: return left / right;
             }
+        }
+
+        public double Visit( ErrorNode n )
+        {
+            return Double.NaN;
         }
 
         public static double Evaluate( Node n )
         {
-            var v = new EvalVisitor();
-            v.Visit( n );
-            return v._curentValue;
+            return new EvalVisitor().Visit( n );
         }
+
     }
 }

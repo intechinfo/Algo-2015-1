@@ -15,19 +15,20 @@ namespace ITI.Parsing
             _buffer = new StringBuilder();
         }
 
-        public override void Visit( ConstantNode n )
+        public override Node Visit( ConstantNode n )
         {
             _buffer.Append( n.Value );
-            base.Visit( n );
+            return n;
         }
 
-        public override void Visit( BinaryOperatorNode n )
+        public override Node Visit( BinaryOperatorNode n )
         {
             _buffer.Append( '(' );
-            Visit( n.Left );
+            this.Visit( n.Left );
             _buffer.Append( n.OperatorString );
-            Visit( n.Right );
+            this.Visit( n.Right );
             _buffer.Append( ')' );
+            return n;
         }
 
         public override string ToString()

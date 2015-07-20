@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 
 namespace ITI.Parsing
 {
-    public abstract class AbstractVisitor
+    public abstract class AbstractVisitor : IAbstractVisitor<Node>
     {
-        public void Visit( Node n )
+        public virtual Node Visit( ConstantNode n )
         {
-            n.Accept( this );
+            return n;
         }
 
-        public virtual void Visit( ConstantNode n )
+        public virtual Node Visit( BinaryOperatorNode n )
         {
+            this.Visit( n.Left );
+            this.Visit( n.Right );
+            return n;
         }
 
-        public virtual void Visit( BinaryOperatorNode n )
+        public virtual Node Visit( ErrorNode n )
         {
-            Visit( n.Left );
-            Visit( n.Right );
-        }
-
-        public virtual void Visit( ErrorNode n )
-        {
+            return n;
         }
 
     }
