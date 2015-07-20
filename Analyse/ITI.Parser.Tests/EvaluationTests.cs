@@ -17,7 +17,7 @@ namespace ITI.Parsing.Tests
         {
             Analyser a = new Analyser();
             Node e = a.Expression( expression );
-            double result = EvalVisitor.Evaluate( expression );
+            double result = EvalVisitor.Evaluate( e );
             Assert.That( result, Is.EqualTo( expected ) );
         }
 
