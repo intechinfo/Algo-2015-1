@@ -31,6 +31,13 @@ namespace ITI.Parsing
             return n;
         }
 
+        public override Node Visit( UnaryOperatorNode n )
+        {
+            _buffer.Append( '-' );
+            this.VisitNode( n.Right );
+            return n;
+        }
+
         public override string ToString()
         {
             return _buffer.ToString();
