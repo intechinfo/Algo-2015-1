@@ -14,5 +14,10 @@ namespace ITI.Parsing
         }
 
         public string Message { get; private set; }
+
+        public override string ToString()
+        {
+            return "Error: " + Message;
+        }
     }
 }

@@ -23,5 +23,19 @@ namespace ITI.Parsing
         public Node Left { get; private set; }
         
         public Node Right { get; private set; }
+
+        public override string ToString()
+        {
+            string oper;
+            switch( Operator )
+            {
+                case TokenType.Minus: oper = "-"; break;
+                case TokenType.Plus: oper = "+"; break;
+                case TokenType.Mult: oper = "*"; break;
+                case TokenType.Div: oper = "/"; break;
+                default: throw new Exception( "Invalid Operator." );
+            }
+            return String.Format( "[{0},{1},{2}]", oper, Left, Right );
+        }
     }
 }
