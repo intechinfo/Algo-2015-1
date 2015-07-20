@@ -36,5 +36,14 @@ namespace ITI.Parsing.Tests
             Node e = a.Expression( expression );
             Assert.That( e.ToString(), Is.EqualTo( treeRepresentation ) );
         }
+
+        [TestCase( "6 - 4 + 5", "(6-(4+5))" )]
+        [TestCase( "68 * 4 + 8)", "((68*4)+8)" )]
+        public void simple_expression_via_ToStringVisitor( string expression, string representation )
+        {
+            Analyser a = new Analyser();
+            Node e = a.Expression( expression );
+            Assert.That( ToStringVisitor.Stringify( e ), Is.EqualTo( representation ) );
+        }
     }
 }

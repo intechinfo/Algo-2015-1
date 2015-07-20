@@ -19,5 +19,11 @@ namespace ITI.Parsing
         {
             return "Error: " + Message;
         }
+
+        public override void Accept( AbstractVisitor v )
+        {
+            v.Visit( this );
+        }
+
     }
 }

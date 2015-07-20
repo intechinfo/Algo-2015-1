@@ -18,6 +18,12 @@ namespace ITI.Parsing
         public override string ToString()
         {
             return Value.ToString();
-        } 
+        }
+
+        public override void Accept( AbstractVisitor v )
+        {
+            v.Visit( this );
+        }
+
     }
 }

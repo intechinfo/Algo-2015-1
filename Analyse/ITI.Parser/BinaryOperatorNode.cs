@@ -26,16 +26,30 @@ namespace ITI.Parsing
 
         public override string ToString()
         {
-            string oper;
-            switch( Operator )
-            {
-                case TokenType.Minus: oper = "-"; break;
-                case TokenType.Plus: oper = "+"; break;
-                case TokenType.Mult: oper = "*"; break;
-                case TokenType.Div: oper = "/"; break;
-                default: throw new Exception( "Invalid Operator." );
-            }
-            return String.Format( "[{0},{1},{2}]", oper, Left, Right );
+            return String.Format( "[{0},{1},{2}]", OperatorString, Left, Right );
         }
+
+        public string OperatorString
+        {
+            get
+            {
+                string oper;
+                switch( Operator )
+                {
+                    case TokenType.Minus: oper = "-"; break;
+                    case TokenType.Plus: oper = "+"; break;
+                    case TokenType.Mult: oper = "*"; break;
+                    case TokenType.Div: oper = "/"; break;
+                    default: throw new Exception( "Invalid Operator." );
+                }
+                return oper;
+            }
+        }
+
+        public override void Accept( AbstractVisitor v )
+        {
+            v.Visit( this );
+        }
+
     }
 }
