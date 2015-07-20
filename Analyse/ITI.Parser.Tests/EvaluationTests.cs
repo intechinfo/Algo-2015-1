@@ -10,7 +10,7 @@ namespace ITI.Parsing.Tests
     [TestFixture]
     public class EvaluationTests
     {
-        [TestCase( "6 - 4 + 5", -3.0 )]
+        [TestCase( "6 - 4 + 5", 7.0 )]
         [TestCase( "6 - (4 + 5)", -3.0 )]
         [TestCase( "(6 - 4) + 5", 7.0 )]
         public void simple_expression( string expression, double expected )

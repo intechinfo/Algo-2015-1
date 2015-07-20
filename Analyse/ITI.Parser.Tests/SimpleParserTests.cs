@@ -10,7 +10,6 @@ namespace ITI.Parsing.Tests
     [TestFixture]
     public class SimpleParserTests
     {
-        [TestCase( "6 - 4 + 5" )]
         [TestCase( "6 - (4 + 5)" )]
         public void simple_expression( string expression )
         {
@@ -26,7 +25,7 @@ namespace ITI.Parsing.Tests
             Assert.That( right.Operator, Is.EqualTo( TokenType.Plus ) );
         }
 
-        [TestCase( "6 - 4 + 5", "[-,6,[+,4,5]]" )]
+        [TestCase( "6 - 4 + 5", "[+,[-,6,4],5]" )]
         [TestCase( "6 - (4 + 5)", "[-,6,[+,4,5]]" )]
         [TestCase( "68 - 4 * 8)", "[-,68,[*,4,8]]" )]
         [TestCase( "68 * 4 + 8)", "[+,[*,68,4],8]" )]
@@ -37,7 +36,7 @@ namespace ITI.Parsing.Tests
             Assert.That( e.ToString(), Is.EqualTo( treeRepresentation ) );
         }
 
-        [TestCase( "6 - 4 + 5", "(6-(4+5))" )]
+        [TestCase( "6 - 4 + 5", "((6-4)+5)" )]
         [TestCase( "68 * 4 + 8)", "((68*4)+8)" )]
         public void simple_expression_via_ToStringVisitor( string expression, string representation )
         {

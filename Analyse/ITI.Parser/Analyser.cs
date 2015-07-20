@@ -14,28 +14,30 @@ namespace ITI.Parsing
             return Expression( new Tokenizer( s ) );
         }
 
+        // Before (from TD):      expression --> term +/- expression | term
+        // After (some thoughts): expression --> term [+/- term]*
         public Node Expression( Tokenizer tokenizer )
         {
-            Node term = Term( tokenizer );
-            if( !(term is ErrorNode) )
+            Node left = Term( tokenizer );
+            while( !(left is ErrorNode) )
             {
                 TokenType oper = tokenizer.CurrentToken;
-                if( oper == TokenType.Plus || oper == TokenType.Minus )
-                {
-                    tokenizer.GetNextToken();
-                    return new BinaryOperatorNode( oper, term, Expression( tokenizer ) );
-                }
+                if( !tokenizer.Match( TokenType.Plus ) && !tokenizer.Match( TokenType.Minus ) ) break;
+                left = new BinaryOperatorNode( oper, left, Term( tokenizer ) );
             }
-            return term;
+            return left;
         }
 
         public Node Term( Tokenizer tokenizer )
         {
-            Node factor = Factor( tokenizer );
-            if( factor is ErrorNode ) return factor;
-            if( tokenizer.Match( TokenType.Mult ) ) return new BinaryOperatorNode( TokenType.Mult, factor, Term( tokenizer ) );
-            if( tokenizer.Match( TokenType.Div ) ) return new BinaryOperatorNode( TokenType.Div, factor, Term( tokenizer ) );
-            return factor;
+            Node left = Factor( tokenizer );
+            while( !(left is ErrorNode) )
+            {
+                TokenType oper = tokenizer.CurrentToken;
+                if( !tokenizer.Match( TokenType.Mult ) && !tokenizer.Match( TokenType.Div ) ) break;
+                left = new BinaryOperatorNode( oper, left, Factor( tokenizer ) );
+            }
+            return left;
         }
 
         public Node Factor( Tokenizer tokenizer )
