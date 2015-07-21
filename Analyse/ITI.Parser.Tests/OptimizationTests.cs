@@ -22,5 +22,22 @@ namespace ITI.Parsing.Tests
             Node eOptimized = optimizer.VisitNode( e );
             Assert.That( ToStringVisitor.Stringify( eOptimized ), Is.EqualTo( rewritten ) );
         }
+
+        [TestCase( "3 - 7 + x", "(-4+x)" )]
+        [TestCase( "x + 3 - 7", "(-4+x)" )]
+        [TestCase( "3 + x - 7", "(-4+x)" )]
+        [TestCase( "3 - x - 7", "(-4-x)" )]
+        [TestCase( "30 * x / 6", "(5*x)" )]
+        [TestCase( "3 *(x - 7)", "(3*(-7+x))" )]
+        public void constant_resolution( string expression, string rewritten )
+        {
+            Analyser a = new Analyser();
+            Node e = a.Expression( expression );
+            var o1 = new RemoveUselessUnaryMinusVisitor();
+            var o2 = new ConstantResolverVisitor();
+            Node e1 = o1.VisitNode( e );
+            Node e2 = o2.VisitNode( e1 );
+            Assert.That( ToStringVisitor.Stringify( e2 ), Is.EqualTo( rewritten ) );
+        }
     }
 }
