@@ -13,6 +13,7 @@ namespace ITI.Parsing.Tests
         [TestCase( "6 + - - 4", "(6+4)" )]
         [TestCase( "x + -(-y)", "(x+y)" )]
         [TestCase( "x + -4", "(x+-4)" )]
+        [TestCase( "x + - -- -- 4", "(x+-4)" )]
         public void useless_minus( string expression, string rewritten )
         {
             Analyser a = new Analyser();

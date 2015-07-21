@@ -8,12 +8,12 @@ namespace ITI.Parsing
 {
     public class ConstantNode : Node
     {
-        public ConstantNode( int value )
+        public ConstantNode( double value )
         {
             Value = value;
         }
 
-        public int Value { get; private set; }
+        public double Value { get; private set; }
 
         public override string ToString()
         {

@@ -21,6 +21,11 @@ namespace ITI.Parsing
                         return rMinus.Right;
                     }
                 }
+                else if( visited is ConstantNode )
+                {
+                    ConstantNode vC = (ConstantNode)visited;
+                    return new ConstantNode( -vC.Value );
+                }
             }
             if( visited == n.Right ) return n;
             return new UnaryOperatorNode( n.Operator, visited );
