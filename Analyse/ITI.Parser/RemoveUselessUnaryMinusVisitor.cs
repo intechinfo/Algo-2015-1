@@ -8,6 +8,22 @@ namespace ITI.Parsing
 {
     public class RemoveUselessUnaryMinusVisitor : AbstractVisitor
     {
-
+        public override Node Visit( UnaryOperatorNode n )
+        {
+            Node visited = this.VisitNode( n.Right );
+            if( n.Operator == TokenType.Minus )
+            {
+                if( visited is UnaryOperatorNode )
+                {
+                    UnaryOperatorNode rMinus = (UnaryOperatorNode)visited;
+                    if( rMinus.Operator == TokenType.Minus )
+                    {
+                        return rMinus.Right;
+                    }
+                }
+            }
+            if( visited == n.Right ) return n;
+            return new UnaryOperatorNode( n.Operator, visited );
+        }
     }
 }

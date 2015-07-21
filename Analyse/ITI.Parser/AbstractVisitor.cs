@@ -15,9 +15,10 @@ namespace ITI.Parsing
 
         public virtual Node Visit( BinaryOperatorNode n )
         {
-            this.VisitNode( n.Left );
-            this.VisitNode( n.Right );
-            return n;
+            var newLeft = this.VisitNode( n.Left );
+            var newRight = this.VisitNode( n.Right );
+            if( newLeft == n.Left && newRight == n.Right ) return n;
+            return new BinaryOperatorNode( n.Operator, newLeft, newRight );
         }
 
         public virtual Node Visit( ErrorNode n )
@@ -27,7 +28,9 @@ namespace ITI.Parsing
 
         public virtual Node Visit( UnaryOperatorNode n )
         {
-            return n;
+            var newRight = this.VisitNode( n.Right );
+            if( newRight == n.Right ) return n;
+            return new UnaryOperatorNode( n.Operator, newRight );
         }
 
         public virtual Node Visit( VariableNode n )
