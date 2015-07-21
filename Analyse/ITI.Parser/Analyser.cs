@@ -42,7 +42,7 @@ namespace ITI.Parsing
 
         public Node Factor( Tokenizer tokenizer )
         {
-            if( tokenizer.Match( TokenType.Minus ) ) return new UnaryOperatorNode( TokenType.Minus, PositiveFactor( tokenizer ) );
+            if( tokenizer.Match( TokenType.Minus ) ) return new UnaryOperatorNode( TokenType.Minus, Factor( tokenizer ) );
             return PositiveFactor( tokenizer );
         }
         public Node PositiveFactor( Tokenizer tokenizer )

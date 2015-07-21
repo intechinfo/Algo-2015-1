@@ -45,6 +45,12 @@ namespace ITI.Parsing
             return n;
         }
 
+        public override Node Visit( ErrorNode n )
+        {
+            _buffer.Append( n.Message );
+            return n;
+        }
+
         public override string ToString()
         {
             return _buffer.ToString();
