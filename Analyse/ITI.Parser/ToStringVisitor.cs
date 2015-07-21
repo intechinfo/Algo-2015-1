@@ -33,8 +33,9 @@ namespace ITI.Parsing
 
         public override Node Visit( UnaryOperatorNode n )
         {
-            _buffer.Append( '-' );
+            _buffer.Append( "-[" );
             this.VisitNode( n.Right );
+            _buffer.Append( "]" );
             return n;
         }
 

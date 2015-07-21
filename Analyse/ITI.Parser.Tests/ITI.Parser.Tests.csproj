@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OptimizationTests.cs" />
     <Compile Include="EvaluationTests.cs" />
     <Compile Include="SimpleParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
