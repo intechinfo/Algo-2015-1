@@ -15,6 +15,8 @@ namespace ITI.Parsing
         T Visit( ErrorNode n );
 
         T Visit( UnaryOperatorNode n );
+
+        T Visit( VariableNode n );
    }
 
     public static class IAbstractVisitorExtensions

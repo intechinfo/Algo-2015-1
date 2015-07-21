@@ -9,6 +9,13 @@ namespace ITI.Parsing
 {
     public class EvalVisitor : IAbstractVisitor<double>
     {
+        readonly Func<string,double> _variableGetter;
+
+        public EvalVisitor( Func<string,double> variableGetter )
+        {
+            _variableGetter = variableGetter;
+        }
+
         public double Visit( ConstantNode n )
         {
             return n.Value;
@@ -38,9 +45,24 @@ namespace ITI.Parsing
             return Double.NaN;
         }
 
-        public static double Evaluate( Node n )
+        public double Visit( VariableNode n )
         {
-            return new EvalVisitor().VisitNode( n );
+            return _variableGetter == null ? Double.NaN : _variableGetter( n.Name );
+        }
+
+        public static double Evaluate( Node n, Func<string, double> variableGetter = null )
+        {
+            return new EvalVisitor( variableGetter ).VisitNode( n );
+        }
+
+        public static double Evaluate( Node n, IDictionary<string, double> variables )
+        {
+            return new EvalVisitor( name => 
+            {
+                Double v;
+                if( variables.TryGetValue( name, out v ) ) return v;
+                return Double.NaN;
+            } ).VisitNode( n );
         }
 
     }

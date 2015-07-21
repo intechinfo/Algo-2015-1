@@ -30,5 +30,10 @@ namespace ITI.Parsing
             return n;
         }
 
+        public virtual Node Visit( VariableNode n )
+        {
+            return n;
+        }
+
     }
 }

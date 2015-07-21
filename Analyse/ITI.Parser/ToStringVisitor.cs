@@ -38,6 +38,12 @@ namespace ITI.Parsing
             return n;
         }
 
+        public override Node Visit( VariableNode n )
+        {
+            _buffer.Append( n.Name );
+            return n;
+        }
+
         public override string ToString()
         {
             return _buffer.ToString();

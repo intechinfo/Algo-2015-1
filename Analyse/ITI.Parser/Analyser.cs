@@ -47,19 +47,17 @@ namespace ITI.Parsing
         }
         public Node PositiveFactor( Tokenizer tokenizer )
         {
-            if( tokenizer.CurrentToken == TokenType.Number ) return Constant( tokenizer );
-            if( !tokenizer.Match( TokenType.OpenPar ) ) return new ErrorNode( "Expected constant or opening parenthesis." );
+            int value;
+            if( tokenizer.MatchInteger( out value ) ) return new ConstantNode( value );
+            
+            string variableName;
+            if( tokenizer.MatchIdentifier( out variableName ) ) return new VariableNode( variableName );
+
+            if( !tokenizer.Match( TokenType.OpenPar ) ) return new ErrorNode( "Expected constant or identifier or opening parenthesis." );
             Node e = Expression( tokenizer );
             if( e is ErrorNode ) return e;
             if( !tokenizer.Match( TokenType.ClosePar ) ) return new ErrorNode( "Expected closing parenthesis." );
             return e;
-        }
-
-        public Node Constant( Tokenizer tokenizer )
-        {
-            int value;
-            if( !tokenizer.MatchInteger( out value ) ) return new ErrorNode( "Constant expected." );
-            return new ConstantNode( value );
         }
 
     }
