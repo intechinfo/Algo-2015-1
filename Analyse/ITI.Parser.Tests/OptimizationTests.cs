@@ -29,6 +29,7 @@ namespace ITI.Parsing.Tests
         [TestCase( "3 - x - 7", "(-4-x)" )]
         [TestCase( "30 * x / 6", "(5*x)" )]
         [TestCase( "3 *(x - 7)", "(3*(-7+x))" )]
+        [TestCase( "3 *(x - 7 + 5 - (5*1))", "(3*(-7+x))" )]
         public void constant_resolution( string expression, string rewritten )
         {
             Analyser a = new Analyser();
