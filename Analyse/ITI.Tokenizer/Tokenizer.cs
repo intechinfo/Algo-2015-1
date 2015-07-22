@@ -120,6 +120,8 @@ namespace ITI.Parsing
                 case '*': return _type = TokenType.Mult;
                 case '/': return _type = TokenType.Div;
                 case '+': return _type = TokenType.Plus;
+                case '?': return _type = TokenType.QuestionMark;
+                case ':': return _type = TokenType.Colon;
                 case '-': return _type = TokenType.Minus;
                 case '(': return _type = TokenType.OpenPar;
                 case ')': return _type = TokenType.ClosePar;

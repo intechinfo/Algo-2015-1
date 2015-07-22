@@ -14,7 +14,7 @@ namespace ITI.Parsing.Tests
         public void simple_expression( string expression )
         {
             Analyser a = new Analyser();
-            Node e = a.Expression( expression );
+            Node e = a.Analyse( expression );
             Assert.That( e, Is.InstanceOf<BinaryOperatorNode>() );
             var root = (BinaryOperatorNode)e;
             Assert.That( root.Operator, Is.EqualTo( TokenType.Minus ) );
@@ -32,7 +32,7 @@ namespace ITI.Parsing.Tests
         public void simple_expression( string expression, string treeRepresentation )
         {
             Analyser a = new Analyser();
-            Node e = a.Expression( expression );
+            Node e = a.Analyse( expression );
             Assert.That( e.ToString(), Is.EqualTo( treeRepresentation ) );
         }
 
@@ -41,7 +41,7 @@ namespace ITI.Parsing.Tests
         public void simple_expression_via_ToStringVisitor( string expression, string representation )
         {
             Analyser a = new Analyser();
-            Node e = a.Expression( expression );
+            Node e = a.Analyse( expression );
             Assert.That( ToStringVisitor.Stringify( e ), Is.EqualTo( representation ) );
         }
     }

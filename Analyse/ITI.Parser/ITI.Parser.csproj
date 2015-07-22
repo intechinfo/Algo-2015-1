@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstantResolverVisitor.cs" />
+    <Compile Include="IfNode.cs" />
     <Compile Include="RemoveUselessUnaryMinusVisitor.cs" />
     <Compile Include="VariableNode.cs" />
     <Compile Include="UnaryOperatorNode.cs" />

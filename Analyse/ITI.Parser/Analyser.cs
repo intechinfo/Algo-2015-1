@@ -9,14 +9,29 @@ namespace ITI.Parsing
     public class Analyser
     {
 
-        public Node Expression( string s )
+        public Node Analyse( string s )
         {
-            return Expression( new Tokenizer( s ) );
+            return Analyse( new Tokenizer( s ) );
+        }
+
+        public Node Analyse( Tokenizer tokenizer )
+        {
+            return SuperExpression( tokenizer );
+        }
+
+        Node SuperExpression( Tokenizer tokenizer )
+        {
+            Node e = Expression( tokenizer );
+            if( !tokenizer.Match( TokenType.QuestionMark ) ) return e;
+            Node ifTrue = Expression( tokenizer );
+            if( !tokenizer.Match( TokenType.Colon ) ) return new ErrorNode( "Expected ':'." );
+            Node ifFalse = Expression( tokenizer );
+            return new IfNode( e, ifTrue, ifFalse );
         }
 
         // Before (from TD):      expression --> term +/- expression | term
         // After (some thoughts): expression --> term [+/- term]*
-        public Node Expression( Tokenizer tokenizer )
+        Node Expression( Tokenizer tokenizer )
         {
             Node left = Term( tokenizer );
             while( !(left is ErrorNode) )
@@ -28,7 +43,7 @@ namespace ITI.Parsing
             return left;
         }
 
-        public Node Term( Tokenizer tokenizer )
+        Node Term( Tokenizer tokenizer )
         {
             Node left = Factor( tokenizer );
             while( !(left is ErrorNode) )
@@ -40,12 +55,12 @@ namespace ITI.Parsing
             return left;
         }
 
-        public Node Factor( Tokenizer tokenizer )
+        Node Factor( Tokenizer tokenizer )
         {
             if( tokenizer.Match( TokenType.Minus ) ) return new UnaryOperatorNode( TokenType.Minus, Factor( tokenizer ) );
             return PositiveFactor( tokenizer );
         }
-        public Node PositiveFactor( Tokenizer tokenizer )
+        Node PositiveFactor( Tokenizer tokenizer )
         {
             int value;
             if( tokenizer.MatchInteger( out value ) ) return new ConstantNode( value );
@@ -54,7 +69,7 @@ namespace ITI.Parsing
             if( tokenizer.MatchIdentifier( out variableName ) ) return new VariableNode( variableName );
 
             if( !tokenizer.Match( TokenType.OpenPar ) ) return new ErrorNode( "Expected constant or identifier or opening parenthesis." );
-            Node e = Expression( tokenizer );
+            Node e = SuperExpression( tokenizer );
             if( e is ErrorNode ) return e;
             if( !tokenizer.Match( TokenType.ClosePar ) ) return new ErrorNode( "Expected closing parenthesis." );
             return e;

@@ -17,7 +17,7 @@ namespace ITI.Parsing.Tests
         public void useless_minus( string expression, string rewritten )
         {
             Analyser a = new Analyser();
-            Node e = a.Expression( expression );
+            Node e = a.Analyse( expression );
             var optimizer = new RemoveUselessUnaryMinusVisitor();
             Node eOptimized = optimizer.VisitNode( e );
             Assert.That( ToStringVisitor.Stringify( eOptimized ), Is.EqualTo( rewritten ) );
@@ -33,7 +33,7 @@ namespace ITI.Parsing.Tests
         public void constant_resolution( string expression, string rewritten )
         {
             Analyser a = new Analyser();
-            Node e = a.Expression( expression );
+            Node e = a.Analyse( expression );
             var o1 = new RemoveUselessUnaryMinusVisitor();
             var o2 = new ConstantResolverVisitor();
             Node e1 = o1.VisitNode( e );

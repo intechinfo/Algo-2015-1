@@ -50,6 +50,11 @@ namespace ITI.Parsing
             return _variableGetter == null ? Double.NaN : _variableGetter( n.Name );
         }
 
+        public double Visit( IfNode n )
+        {
+            return this.VisitNode( n.Condition ) >= 0 ? this.VisitNode( n.IfTrue ): this.VisitNode( n.IfFalse );
+        }
+
         public static double Evaluate( Node n, Func<string, double> variableGetter = null )
         {
             return new EvalVisitor( variableGetter ).VisitNode( n );

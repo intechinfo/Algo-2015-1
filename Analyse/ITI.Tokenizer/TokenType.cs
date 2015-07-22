@@ -22,7 +22,10 @@ namespace ITI.Parsing
         
         OpenPar = IsBracket + 0,
         ClosePar = IsBracket + 1,
-        
+
+        QuestionMark = 1,
+        Colon = 2,
+
         EndOfInput = 1 << 30,
         Error = 1 << 31
     }

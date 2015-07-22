@@ -33,7 +33,16 @@ namespace ITI.Parsing
             return new UnaryOperatorNode( n.Operator, newRight );
         }
 
-        public virtual Node Visit( VariableNode n )
+        public virtual Node Visit( IfNode n )
+        {
+            var newC = this.VisitNode( n.Condition );
+            var newT = this.VisitNode( n.IfTrue );
+            var newF = this.VisitNode( n.IfFalse );
+            if( newC == n.Condition && newT == n.IfTrue && newF == n.IfFalse ) return n;
+            return new IfNode( newC, newT, newF );
+        }
+
+       public virtual Node Visit( VariableNode n )
         {
             return n;
         }
