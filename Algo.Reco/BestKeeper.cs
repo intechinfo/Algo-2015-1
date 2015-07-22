@@ -47,7 +47,9 @@ namespace Algo
                 _count++;
                 return true;
             }
-            Array.Copy( _items, idx, _items, idx + 1, _count - idx );
+            int toCopy = _count - idx;
+            if( _count == _items.Length ) --toCopy;
+            Array.Copy( _items, idx, _items, idx + 1, toCopy );
             _items[idx] = candidate;
             if( _count < _items.Length ) _count++;
             return true;

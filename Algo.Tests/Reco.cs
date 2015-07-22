@@ -156,6 +156,14 @@ namespace Algo.Tests
             Assert.That( b.Add( 1 ) );
             Assert.That( b.Add( 0 ), Is.False );
             CollectionAssert.AreEqual( new int[] { 5, 4, 3, 2, 1 }, b );
+            Assert.That( b.Add( 1000 ) );
+            CollectionAssert.AreEqual( new int[] { 1000, 5, 4, 3, 2 }, b );
+            Assert.That( b.Add( 2000 ) );
+            Assert.That( b.Add( 3000 ) );
+            Assert.That( b.Add( 4000 ) );
+            Assert.That( b.Add( 5000 ) );
+            Assert.That( b.Add( 1 ), Is.False );
+            CollectionAssert.AreEqual( new int[] { 5000, 4000, 3000, 2000, 1000 }, b );
         }
 
     }
