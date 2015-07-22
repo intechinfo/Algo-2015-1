@@ -26,7 +26,7 @@ namespace ITI.Parsing.Tests
         [TestCase( "3 - 7 + x", "(-4+x)" )]
         [TestCase( "x + 3 - 7", "(-4+x)" )]
         [TestCase( "3 + x - 7", "(-4+x)" )]
-        [TestCase( "3 - x - 7", "(-4-x)" )]
+        [TestCase( "3 + - x - 7", "(-4-x)" )]
         [TestCase( "30 * x / 6", "(5*x)" )]
         [TestCase( "3 *(x - 7)", "(3*(-7+x))" )]
         [TestCase( "3 *(x - 7 + 5 - (5*1))", "(3*(-7+x))" )]

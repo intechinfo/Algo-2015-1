@@ -59,19 +59,20 @@ namespace ITI.Parsing
                     cRight = null;
                 }
             }
-            // If this is a '+' or a '*': constants can be composed...
-            // ...if left is a constant and right is the same binary operator as this
-            // with a constant left.
-            if( oper == TokenType.Mult || oper == TokenType.Plus )
+            // Now that this node is normalized, if we have a constant, it is necessary on the left.
+            if( cLeft != null )
             {
-                var bRight = right as BinaryOperatorNode;
-                if( bRight != null && bRight.Operator == oper && bRight.Left is ConstantNode )
+                if( oper == TokenType.Mult || oper == TokenType.Plus )
                 {
-                    double otherValue = ((ConstantNode)bRight.Left).Value;
-                    double composedValue;
-                    if( oper == TokenType.Mult ) composedValue = cLeft.Value * otherValue;
-                    else composedValue = cLeft.Value + otherValue;
-                    return new BinaryOperatorNode( oper, new ConstantNode( composedValue ), bRight.Right );
+                    var bRight = right as BinaryOperatorNode;
+                    if( bRight != null && bRight.Operator == oper && bRight.Left is ConstantNode )
+                    {
+                        double otherValue = ((ConstantNode)bRight.Left).Value;
+                        double composedValue;
+                        if( oper == TokenType.Mult ) composedValue = cLeft.Value * otherValue;
+                        else composedValue = cLeft.Value + otherValue;
+                        return new BinaryOperatorNode( oper, new ConstantNode( composedValue ), bRight.Right );
+                    }
                 }
             }
             // 3 - Normal processing.
