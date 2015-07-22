@@ -42,5 +42,18 @@ namespace ITI.Parsing.Tests
             double result = EvalVisitor.Evaluate( e, name => name == "x" ? x : (name == "y" ? y : Double.NaN) );
             Assert.That( result, Is.EqualTo( expected ) );
         }
+
+        [TestCase( "6 - 4 ? 5 : -5", 5.0 )]
+        [TestCase( "6 - 6 ? 2 : -2", 2.0 )]
+        [TestCase( "6 - 7 ? 2 : -2", -2.0 )]
+        public void ternary_operator( string expression, double expected )
+        {
+            Analyser a = new Analyser();
+            Node e = a.Expression( expression );
+            double result = EvalVisitor.Evaluate( e );
+            Assert.That( result, Is.EqualTo( expected ) );
+        }
+
+
     }
 }
